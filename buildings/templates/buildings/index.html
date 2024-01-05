@@ -1,0 +1,90 @@
+{% extends "buildings/base.html" %}
+
+{% load static %}
+
+{% block main %}
+
+<div id="header">
+    <div id="logo">
+            <img id="logo-icon" src="{% static 'buildings/logo.png' %}" alt="Logo">
+            <p id="logo-text">Brown Bear Dens</p>
+    </div>
+</div>
+
+<div id="filters">
+    <div>
+        <label for="year-select">Class year</label>
+        <select id="year-select">
+            <option value="all">All</option>
+            <option value="so">Sophomore</option>
+            <option value="jrsr">Junior/Senior</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="capacity-select">Class year</label>
+        <select id="capacity-select">
+            <option value="all">All</option>
+            <option value="single">Single</option>
+            <option value="double">Double</option>
+            <option value="triple">Triple</option>
+            <option value="quad">Quad</option>
+        </select>
+    </div>
+
+     <div>
+        <label for="suite-select">Part of suite</label>
+        <select id="suite-select">
+            <option value="all">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="location-select">Location</label>
+        <select id="location-select">
+            <option value="all">All</option>
+            <option value="Wriston Quad">Wriston Quad</option>
+            <option value="Main Green">Main Green</option>
+            <option value="Grad Center">Grad Center</option>
+            <option value="Gregorian Quad">Gregorian Quad</option>
+            <option value="Pembroke">Pembroke</option>
+            <option value="Ruth J. Simmons">Ruth J. Simmons</option>
+            <option value="Thayer Street">Thayer Street</option>
+            <option value="East Campus">East Campus</option>
+            <option value="Machado">Machado</option>
+        </select>
+    </div>
+
+     <div>
+        <label for="floor-select">Floor level</label>
+        <select id="floor-select">
+            <option value="all">All</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+    </div>
+
+     <div>
+        <label for="room-sort">Sort rooms</label>
+        <select id="room-sort">
+            <option value="name">Name</option>
+            <option value="sqft">Square feet</option>
+        </select>
+    </div>
+
+    <button id="reset-filters">Reset filters</button>
+</div>
+
+{% include "buildings/display.html" %}
+
+{% endblock %}

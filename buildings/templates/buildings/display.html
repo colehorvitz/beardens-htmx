@@ -1,0 +1,73 @@
+{% load static %}
+
+<div id="display">
+    <div id="building-list" class="scrollbar">
+		{% for building in buildings %}
+			<button class="building" hx-get="/buildings/{{ building.pk }}" hx-target="#display" hx-swap="outerHTML" hx-indicator="#spinner-{{ building.pk }}">
+                <div class="building-data">
+                    <h3 class="building-name{% if building.pk == selected_building.pk %} building-selected{% endif %}">{{ building.name }}</h3>
+                    <p>{{ building.location }}</p>
+                </div>
+                <div id="spinner-{{ building.pk }}" class="htmx-indicator spinner"></div>
+			</button>
+		{% endfor %}
+    </div>
+
+    <div id="building-detail" class="scrollbar">
+        <button id="building-detail-thumbnail">
+            <img  src="{% get_media_prefix %}{{ selected_building.image }}">
+        </button>
+        <div id="building-detail-data">
+            <h2 id="building-detail-name">{{ selected_building.name }}</h2>
+            <h3 id="building-detail-location">{{ selected_building.location }}</h3>
+            <div id="building-detail-values">
+                <div>
+                    <p class="label">Class year</p>
+                    <p class="value">{{ selected_building.get_year_display }}</p>
+                </div>
+                <div>
+                    <p class="label">Laundry</p>
+                        <p class="value">Floor{% if selected_building.laundry_floors|length > 1 %}s{% endif %} {{ selected_building.laundry_floors }}</p>
+                </div>
+                <div>
+                    <p class="label">Capacity</p>
+                    <p class="value">{{ selected_building.capacity }}</p>
+                </div>
+                <div>
+                    <p class="label">GPH</p>
+                    <p class="value">{% if selected_building.is_gph %}Yes{% else %}No{% endif %}</p>
+                </div>
+                <div id="building-detail-address">
+                    <p class="label">Address</p>
+                    <a class="link" href="">{{ selected_building.address }}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="room-list" class="scrollbar">
+        {% for room in selected_building.rooms.all %}
+        <div class="room">
+            <p class="room-name">{{ room.name }}</p>
+            <div class="room-details">
+                <div class="room-detail">
+                    <p class="label">Type</p>
+                    <p class="value">{{ room.get_capacity_display }}</p>
+                </div>
+                <div class="room-detail">
+                    <p class="label">Floor</p>
+                    <p class="value">{{ room.floor }}</p>
+                </div>
+                <div class="room-detail">
+                    <p class="label">Number</p>
+                    <p class="value">{{ room.room_number }}</p>
+                </div>
+                  <div class="room-detail">
+                    <p class="label">Sqft</p>
+                    <p class="value">{{ room.sqft }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
